@@ -1,101 +1,93 @@
+"use client";
+import Login from "@/app/api/auth/login";
+import InputForm from "@/components/input/inputForm";
+import LoaderBook from "@/components/loader-book/loader";
+import axios from "axios";
+import { FormEvent, useState } from "react";
+import Join from "../public/img/join.svg";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [isLoader, setIsLoader] = useState(false);
+  const [email, setEmail] = useState("");
+  const [passw, setPassw] = useState("");
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const handlerLogin = async (event: FormEvent) => {
+    event.preventDefault();
+
+    setIsLoader((e) => !e);
+
+    try {
+      await Login({ email, passw }).then((e) =>
+        alert(`Logado com sucesso!\n${e?.data.JWT}`)
+      );
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.status === 401) {
+        alert(error.response.data.message);
+      } else {
+        console.log("Outro erro ocorreu:", error);
+      }
+
+      setIsLoader((e) => !e);
+    }
+  };
+
+  return (
+    <main className="flex items-center justify-center w-full h-full bg-background text-slate-200">
+      <section className="flex flex-col gap-8 justify-center items-center px-4 backdrop-blur-sm bg-slate-950/40 w-[90%] rounded-2xl py-10">
+        <aside className="w-full flex justify-center">
+          <Image
+            src={Join}
+            alt="Imagen ilustrativa de login"
+            className="w-2/3 rounded-full border-orange-400 border-[0.1rem]"
+          />
+        </aside>
+
+        <aside>
+          <form
+            onSubmit={(e) => handlerLogin(e)}
+            method="post"
+            className="flex flex-col gap-2 items-center"
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+            <div className="flex flex-col gap-7">
+              <InputForm
+                valueName="Email"
+                type="email"
+                required
+                onChangeCapture={(e) => setEmail(e.currentTarget.value)}
+              />
+              <InputForm
+                valueName="Senha"
+                type="password"
+                required
+                onChangeCapture={(e) => setPassw(e.currentTarget.value)}
+              />
+            </div>
+
+            <div className="flex w-full justify-around">
+              <span className="hover:text-orange-400">
+                <a href="http://">SignUp</a>
+              </span>
+              <span className="hover:text-orange-400">
+                <Link href={"/Forgout"}>Forgout?</Link>
+              </span>
+            </div>
+
+            <button
+              className={`flex items-center ${
+                isLoader ? "bg-transparent outline-none" : "bg-slate-400/20"
+              } justify-center mt-8 w-2/3 h-max py-2 rounded-lg hover:bg-slate-400/40`}
+            >
+              {isLoader ? (
+                <LoaderBook />
+              ) : (
+                <strong className="uppercase">login</strong>
+              )}
+            </button>
+          </form>
+        </aside>
+      </section>
+    </main>
   );
 }
