@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    API_URL: "http://localhost:1533",
+    API_URL: "https://api-weld-zeta-16.vercel.app",
   },
 };
 

@@ -70,7 +70,7 @@ export default function Home() {
                 <a href="http://">SignUp</a>
               </span>
               <span className="hover:text-orange-400">
-                <Link href={"/Forgout"}>Forgout?</Link>
+                <Link href={"/forgout"}>Forgout?</Link>
               </span>
             </div>
 
