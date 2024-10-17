@@ -4,7 +4,7 @@ import InputForm from "@/components/input/inputForm";
 import LoaderBook from "@/components/loader-book/loader";
 import axios from "axios";
 import { FormEvent, useState } from "react";
-import Join from "../public/img/join.svg";
+import LoginImg from "../public/img/login.svg";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -35,12 +35,12 @@ export default function Home() {
 
   return (
     <main className="flex items-center justify-center w-full h-full bg-background text-slate-200">
-      <section className="flex flex-col gap-8 justify-center items-center px-4 backdrop-blur-sm bg-slate-950/40 w-[90%] rounded-2xl py-10">
+      <section className="flex flex-col gap-8 justify-center items-center px-4 backdrop-blur-sm border-[0.1rem] border-orange-300 bg-slate-950/40 w-[90%] rounded-2xl py-10">
         <aside className="w-full flex justify-center">
           <Image
-            src={Join}
+            src={LoginImg}
             alt="Imagen ilustrativa de login"
-            className="w-2/3 rounded-full border-orange-400 border-[0.1rem]"
+            className="w-2/3"
           />
         </aside>
 
@@ -48,7 +48,7 @@ export default function Home() {
           <form
             onSubmit={(e) => handlerLogin(e)}
             method="post"
-            className="flex flex-col gap-2 items-center"
+            className="flex flex-col gap-2 items-center "
           >
             <div className="flex flex-col gap-7">
               <InputForm
@@ -67,7 +67,7 @@ export default function Home() {
 
             <div className="flex w-full justify-around">
               <span className="hover:text-orange-400">
-                <a href="http://">SignUp</a>
+                <a href="/signup">SignUp</a>
               </span>
               <span className="hover:text-orange-400">
                 <Link href={"/forgout"}>Forgout?</Link>
