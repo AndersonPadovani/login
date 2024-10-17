@@ -7,7 +7,7 @@ export default function ChangePass() {
   const forgoutToken = urlParms.get("forgoutToken");
 
   return (
-    <Suspense>
+    <Suspense fallback={<div>Loading...</div>}>
       <main className="w-full h-full">change pass page {forgoutToken} </main>
     </Suspense>
   );
