@@ -52,7 +52,7 @@ function ForgoutToken() {
       );
 
       setTimeout(() => {
-        rota.push("/");
+        // rota.push("/");
       }, 3500);
     }
   });
@@ -96,7 +96,7 @@ function ForgoutToken() {
   };
 
   return (
-    <div className="flex flex-col w-full h-full items-center justify-center backdrop-blur-sm">
+    <div className="flex flex-col w-full h-full items-center justify-center backdrop-blur-sm text-slate-200">
       <form
         onSubmit={handlerChangePassword}
         method="post"
