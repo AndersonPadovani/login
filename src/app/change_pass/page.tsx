@@ -52,7 +52,7 @@ function ForgoutToken() {
       );
 
       setTimeout(() => {
-        // rota.push("/");
+        rota.push("/");
       }, 3500);
     }
   });
