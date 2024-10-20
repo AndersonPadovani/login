@@ -1,4 +1,6 @@
 "use client";
+import FadeButton from "@/components/buttonFade/buttonFade";
+import ButtonRunBack from "@/components/buttonRunBack/buttonRunBack";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
@@ -17,5 +19,11 @@ function ForgoutToken() {
   const urlParms = useSearchParams();
   const forgoutToken = urlParms.get("forgoutToken");
 
-  return <>{forgoutToken}</>;
+  return (
+    <>
+      <FadeButton title="CLICK-ME" />
+      <ButtonRunBack />
+      {forgoutToken}
+    </>
+  );
 }
