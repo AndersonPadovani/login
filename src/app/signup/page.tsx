@@ -1,5 +1,4 @@
 "use client";
-import FadeButton from "@/components/buttonFade/buttonFade";
 import InputForm from "@/components/input/inputForm";
 import SignUpSvg from "../../public/img/signup.svg";
 import Image from "next/image";
