@@ -1,0 +1,20 @@
+.inpType:focus ~ label,
+.inpHasText ~ label {
+  background-color: orange;
+  color: black;
+  top: -0.75rem;
+  border-radius: 0.375rem;
+}
+
+label {
+  top: 15px;
+  transition: all ease-in-out 0.7s;
+}
+
+.inpType {
+  border: 1px solid orange;
+}
+
+input ~ label {
+  color: whitesmoke;
+}
